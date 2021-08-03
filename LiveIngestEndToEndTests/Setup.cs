@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Threading;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 
@@ -9,34 +10,56 @@ namespace LiveIngestEndToEndTests
     [SetUpFixture]
     public class Setup
     {
+        private readonly Dictionary<Application, IngestProcess>
+            _processes = new();
+
         [OneTimeSetUp]
         public void EnvironmentSetup()
         {
-            var config = new ConfigurationBuilder()
-                .AddIniFile("appsettings.ini")
-                .Build();
-
-            var exes = config
-                .GetSection("executables")
-                .GetChildren()
-                .Select(c => c.Value);
-
-            foreach (var exe in exes)
+            foreach (var app in (Application[]) Enum.GetValues(
+                typeof(Application)))
             {
-                if (File.Exists(exe)) continue;
-                SetupError($"Required exe {exe} does not exist");
+                try
+                {
+                    _processes[app] = new IngestProcess(app);
+                }
+                catch (FileNotFoundException e)
+                {
+                    SetupError(e.Message);
+                }
             }
 
-            // Validate things are running/available to run
             var toWatch = new DataArchiverCreator().CreateDataArchive();
+
             // Setup ICAT data? AKA delete leftovers in advance
             // Queue component setup/maybe clearing?
-            // Startup live ingest process(es)
+
+            try
+            {
+                _processes[Application.FileWatcher].Start(toWatch);
+                _processes[Application.LiveMonitor].Start();
+                _processes[Application.XMLtoICAT].Start();
+            }
+            catch (ApplicationException e)
+            {
+                SetupError(e.Message);
+            }
+
+            TestContext.Progress.WriteLine("All started");
+        }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            foreach (var proc in _processes.Values)
+            {
+                proc.Stop();
+            }
         }
 
         private void SetupError(string msg)
         {
-            Console.Error.WriteLine($"Fatal error during setup: {msg}");
+            TestContext.Progress.WriteLine($"Fatal error during setup: {msg}");
             Assert.Fail();
         }
     }
