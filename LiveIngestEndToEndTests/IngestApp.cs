@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.WebSockets;
 using NUnit.Framework;
 
 namespace LiveIngestEndToEndTests
@@ -11,9 +10,7 @@ namespace LiveIngestEndToEndTests
     // ReSharper disable once InconsistentNaming
     public enum Application
     {
-        FileWatcher,
-        LiveMonitor,
-        XMLtoICAT,
+        FileWatcher, LiveMonitor, XMLtoICAT,
     }
 
     public class IngestProcess
@@ -24,7 +21,7 @@ namespace LiveIngestEndToEndTests
 
         private static readonly List<string> SuccessMarkers = new()
         {
-            "waiting for files. watching directory", // FileWatcher
+            "waiting for files", // FileWatcher
             "initial setup complete", //LiveMonitor
             "setup was successful", // XMLtoICAT
         };
@@ -34,7 +31,6 @@ namespace LiveIngestEndToEndTests
             "exiting",
             "exception"
         };
-
 
         private readonly string _exe;
         private Process _proc;
@@ -53,31 +49,10 @@ namespace LiveIngestEndToEndTests
             var fullArgs = args.Concat(new[] {"--test-mode"});
             StartProc(fullArgs);
 
-            TestContext.Progress.WriteLine("Waiting to be setup...");
-
-            var error = false;
-            var success = false;
-            while (!error && !success)
-            {
-                string readLine;
-                while ((readLine = _proc.StandardOutput.ReadLine()) == null)
-                {
-                    //wait a bit
-                }
-
-                if (FailureMarkers.Any(m => readLine.ToLower().Contains(m)))
-                {
-                    TestContext.Progress.WriteLine($"Error on: {readLine}");
-                    error = true;
-                }
-                else if (SuccessMarkers.Any(m => readLine.ToLower().Contains(m)))
-                {
-                    TestContext.Progress.WriteLine($"Success on: {readLine}");
-                    success = true;
-                }
-            }
-
-            if (error) throw new ApplicationException($"{_exe} failed to start");
+            TestContext.Progress.WriteLine("Waiting for app to be setup...");
+            var success = WaitForReady(1);
+            if (!success)
+                throw new ApplicationException($"{_exe} failed to start");
         }
 
         private void StartProc(IEnumerable<string> args)
@@ -96,6 +71,56 @@ namespace LiveIngestEndToEndTests
                 }
             };
             _proc.Start();
+        }
+
+        /// <summary>
+        /// Wait up to timeoutSeconds for the process to be ready for ingestion.
+        ///
+        /// Two limitations of this implementation are because ReadLine() is
+        /// blocking - a) if the process hangs at startup, this will also hang,
+        /// and b) timeouts happen after the first output line after timeoutSeconds,
+        /// not at timeoutSeconds exactly.
+        /// </summary>
+        /// <param name="timeoutSeconds">Maximum seconds to wait</param>
+        /// <returns>
+        /// False if the process ends, timeoutSeconds pass, or an error appears in
+        /// the log, otherwise true.
+        /// </returns>
+        private bool WaitForReady(int timeoutSeconds)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            var error = false;
+            var success = false;
+            while (!error && !success)
+            {
+                var readLine = _proc.StandardOutput.ReadLine();
+                TestContext.Progress.WriteLine(readLine);
+
+                if (readLine == null)
+                {
+                    TestContext.Progress.WriteLine(
+                        "Startup aborted unexpectedly");
+                    error = true;
+                }
+                else if (SuccessMarkers.Any(m => readLine.ToLower().Contains(m)))
+                {
+                    TestContext.Progress.WriteLine($"Success on: {readLine}");
+                    success = true;
+                }
+                else if (FailureMarkers.Any(m => readLine.ToLower().Contains(m)))
+                {
+                    TestContext.Progress.WriteLine($"Error on: {readLine}");
+                    error = true;
+                }
+                else if (timer.Elapsed.Seconds > timeoutSeconds)
+                {
+                    TestContext.Progress.WriteLine("Startup timed out");
+                    error = true;
+                }
+            }
+
+            return success;
         }
 
         public void Stop()
