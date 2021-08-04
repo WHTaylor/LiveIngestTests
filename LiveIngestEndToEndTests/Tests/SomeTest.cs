@@ -4,6 +4,8 @@ namespace LiveIngestEndToEndTests.Tests
 {
     public class Tests
     {
+        private DataFileCopier _dataFileCopier = new();
+
         [SetUp]
         public void Setup()
         {

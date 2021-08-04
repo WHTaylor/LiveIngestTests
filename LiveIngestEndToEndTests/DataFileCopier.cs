@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace LiveIngestEndToEndTests
@@ -9,10 +10,10 @@ namespace LiveIngestEndToEndTests
         private readonly string _archiveRoot;
         private string _instrument;
 
-        public DataFileCopier(string testDataRoot, string archiveRoot)
+        public DataFileCopier()
         {
-            _testDataRoot = testDataRoot;
-            _archiveRoot = archiveRoot;
+            _testDataRoot = Environment.GetEnvironmentVariable("TEST_DATA_DIR");
+            _archiveRoot = TempDataArchive.RootDir;
         }
 
         public DataFileCopier ForInstrument(string instrumentName)
