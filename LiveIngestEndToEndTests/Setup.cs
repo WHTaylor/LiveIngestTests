@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
-using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 
 namespace LiveIngestEndToEndTests
@@ -29,7 +27,7 @@ namespace LiveIngestEndToEndTests
                 }
             }
 
-            var toWatch = new DataArchiverCreator().CreateDataArchive();
+            var toWatch = DataArchiveCreator.CreateDataArchive();
 
             // Setup ICAT data? AKA delete leftovers in advance
             // Queue component setup/maybe clearing?

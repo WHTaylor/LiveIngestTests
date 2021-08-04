@@ -2,9 +2,9 @@
 
 namespace LiveIngestEndToEndTests
 {
-    public class DataArchiverCreator
+    public static class DataArchiveCreator
     {
-        public string CreateDataArchive()
+        public static string CreateDataArchive()
         {
             var root = Path.Combine(Path.GetTempPath(), "TestArchive");
             Directory.CreateDirectory(root);
