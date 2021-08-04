@@ -27,14 +27,15 @@ namespace LiveIngestEndToEndTests
                 }
             }
 
-            var toWatch = DataArchiveCreator.CreateDataArchive();
+            TempDataArchive.Create();
 
             // Setup ICAT data? AKA delete leftovers in advance
             // Queue component setup/maybe clearing?
 
             try
             {
-                _processes[Application.FileWatcher].Start(toWatch);
+                _processes[Application.FileWatcher]
+                    .Start(TempDataArchive.RootDir);
                 _processes[Application.LiveMonitor].Start();
                 _processes[Application.XMLtoICAT].Start();
             }
