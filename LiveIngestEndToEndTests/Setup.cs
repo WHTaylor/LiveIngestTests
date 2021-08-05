@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using LiveIngestEndToEndTests.Framework;
 using NUnit.Framework;
 
-namespace LiveIngestEndToEndTests.Setup
+namespace LiveIngestEndToEndTests
 {
     [SetUpFixture]
     public class Setup

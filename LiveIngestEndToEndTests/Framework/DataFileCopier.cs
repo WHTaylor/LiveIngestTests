@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace LiveIngestEndToEndTests
+namespace LiveIngestEndToEndTests.Framework
 {
     public class DataFileCopier
     {

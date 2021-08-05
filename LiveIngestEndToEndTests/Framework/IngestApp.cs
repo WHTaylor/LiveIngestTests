@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 
-namespace LiveIngestEndToEndTests.Setup
+namespace LiveIngestEndToEndTests.Framework
 {
     // ReSharper disable once InconsistentNaming
     public enum Application
