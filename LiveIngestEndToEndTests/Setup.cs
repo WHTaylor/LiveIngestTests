@@ -59,7 +59,7 @@ namespace LiveIngestEndToEndTests
 
         private void SetupError(string msg)
         {
-            TestContext.Progress.WriteLine($"Fatal error during setup: {msg}");
+            TestContext.Error.WriteLine($"Fatal error during setup: {msg}");
             Assert.Fail();
         }
     }

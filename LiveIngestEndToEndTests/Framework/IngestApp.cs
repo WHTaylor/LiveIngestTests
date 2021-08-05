@@ -95,11 +95,10 @@ namespace LiveIngestEndToEndTests.Framework
             while (!error && !success)
             {
                 var readLine = _proc.StandardOutput.ReadLine();
-                TestContext.Progress.WriteLine(readLine);
 
                 if (readLine == null)
                 {
-                    TestContext.Progress.WriteLine(
+                    TestContext.Error.WriteLine(
                         "Startup aborted unexpectedly");
                     error = true;
                 }
@@ -110,12 +109,12 @@ namespace LiveIngestEndToEndTests.Framework
                 }
                 else if (FailureMarkers.Any(m => readLine.ToLower().Contains(m)))
                 {
-                    TestContext.Progress.WriteLine($"Error on: {readLine}");
+                    TestContext.Error.WriteLine($"Error on: {readLine}");
                     error = true;
                 }
                 else if (timer.Elapsed.Seconds > timeoutSeconds)
                 {
-                    TestContext.Progress.WriteLine("Startup timed out");
+                    TestContext.Error.WriteLine("Startup timed out");
                     error = true;
                 }
             }

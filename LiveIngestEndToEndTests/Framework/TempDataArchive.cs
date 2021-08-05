@@ -28,7 +28,6 @@ namespace LiveIngestEndToEndTests.Framework
 
         public static void Create()
         {
-            TestContext.Progress.WriteLine(_created);
             if (_created) return;
 
             Directory.CreateDirectory(RootDir);
