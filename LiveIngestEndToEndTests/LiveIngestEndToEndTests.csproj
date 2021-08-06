@@ -21,4 +21,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\rop61488\projects\work\LiveIngestEndToEndTests\Libraries\ICAT4IngestLibrary\ICAT4IngestLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

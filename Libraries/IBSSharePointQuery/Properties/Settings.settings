@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="IBSSharePointQuery.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UserOfficeAPIKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">e812c8d4-936b-b73f-44de-17c7809739e2</Value>
+    </Setting>
+    <Setting Name="IBSSharePointQuery_ListsService_Lists" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://www.facilities.rl.ac.uk/_vti_bin/Lists.asmx</Value>
+    </Setting>
+    <Setting Name="FedId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">  </Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">  </Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

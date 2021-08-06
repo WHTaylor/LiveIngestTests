@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://icatproject.org" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ICATService" targetNamespace="http://icatproject.org" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="ICAT.xsd" namespace="http://icatproject.org" />
+    </xsd:schema>
+  </types>
+  <message name="getUserName">
+    <part name="parameters" element="tns:getUserName" />
+  </message>
+  <message name="getUserNameResponse">
+    <part name="parameters" element="tns:getUserNameResponse" />
+  </message>
+  <message name="IcatException">
+    <part name="fault" element="tns:IcatException" />
+  </message>
+  <message name="get">
+    <part name="parameters" element="tns:get" />
+  </message>
+  <message name="getResponse">
+    <part name="parameters" element="tns:getResponse" />
+  </message>
+  <message name="getProperties">
+    <part name="parameters" element="tns:getProperties" />
+  </message>
+  <message name="getPropertiesResponse">
+    <part name="parameters" element="tns:getPropertiesResponse" />
+  </message>
+  <message name="create">
+    <part name="parameters" element="tns:create" />
+  </message>
+  <message name="createResponse">
+    <part name="parameters" element="tns:createResponse" />
+  </message>
+  <message name="delete">
+    <part name="parameters" element="tns:delete" />
+  </message>
+  <message name="deleteResponse">
+    <part name="parameters" element="tns:deleteResponse" />
+  </message>
+  <message name="search">
+    <part name="parameters" element="tns:search" />
+  </message>
+  <message name="searchResponse">
+    <part name="parameters" element="tns:searchResponse" />
+  </message>
+  <message name="update">
+    <part name="parameters" element="tns:update" />
+  </message>
+  <message name="updateResponse">
+    <part name="parameters" element="tns:updateResponse" />
+  </message>
+  <message name="dummy">
+    <part name="parameters" element="tns:dummy" />
+  </message>
+  <message name="dummyResponse">
+    <part name="parameters" element="tns:dummyResponse" />
+  </message>
+  <message name="refresh">
+    <part name="parameters" element="tns:refresh" />
+  </message>
+  <message name="refreshResponse">
+    <part name="parameters" element="tns:refreshResponse" />
+  </message>
+  <message name="login">
+    <part name="parameters" element="tns:login" />
+  </message>
+  <message name="loginResponse">
+    <part name="parameters" element="tns:loginResponse" />
+  </message>
+  <message name="logout">
+    <part name="parameters" element="tns:logout" />
+  </message>
+  <message name="logoutResponse">
+    <part name="parameters" element="tns:logoutResponse" />
+  </message>
+  <message name="deleteMany">
+    <part name="parameters" element="tns:deleteMany" />
+  </message>
+  <message name="deleteManyResponse">
+    <part name="parameters" element="tns:deleteManyResponse" />
+  </message>
+  <message name="getEntityInfo">
+    <part name="parameters" element="tns:getEntityInfo" />
+  </message>
+  <message name="getEntityInfoResponse">
+    <part name="parameters" element="tns:getEntityInfoResponse" />
+  </message>
+  <message name="getRemainingMinutes">
+    <part name="parameters" element="tns:getRemainingMinutes" />
+  </message>
+  <message name="getRemainingMinutesResponse">
+    <part name="parameters" element="tns:getRemainingMinutesResponse" />
+  </message>
+  <message name="createMany">
+    <part name="parameters" element="tns:createMany" />
+  </message>
+  <message name="createManyResponse">
+    <part name="parameters" element="tns:createManyResponse" />
+  </message>
+  <message name="getApiVersion">
+    <part name="parameters" element="tns:getApiVersion" />
+  </message>
+  <message name="getApiVersionResponse">
+    <part name="parameters" element="tns:getApiVersionResponse" />
+  </message>
+  <message name="getEntityNames">
+    <part name="parameters" element="tns:getEntityNames" />
+  </message>
+  <message name="getEntityNamesResponse">
+    <part name="parameters" element="tns:getEntityNamesResponse" />
+  </message>
+  <message name="searchText">
+    <part name="parameters" element="tns:searchText" />
+  </message>
+  <message name="searchTextResponse">
+    <part name="parameters" element="tns:searchTextResponse" />
+  </message>
+  <message name="isAccessAllowed">
+    <part name="parameters" element="tns:isAccessAllowed" />
+  </message>
+  <message name="isAccessAllowedResponse">
+    <part name="parameters" element="tns:isAccessAllowedResponse" />
+  </message>
+  <message name="lucenePopulate">
+    <part name="parameters" element="tns:lucenePopulate" />
+  </message>
+  <message name="lucenePopulateResponse">
+    <part name="parameters" element="tns:lucenePopulateResponse" />
+  </message>
+  <message name="luceneClear">
+    <part name="parameters" element="tns:luceneClear" />
+  </message>
+  <message name="luceneClearResponse">
+    <part name="parameters" element="tns:luceneClearResponse" />
+  </message>
+  <message name="luceneCommit">
+    <part name="parameters" element="tns:luceneCommit" />
+  </message>
+  <message name="luceneCommitResponse">
+    <part name="parameters" element="tns:luceneCommitResponse" />
+  </message>
+  <message name="luceneSearch">
+    <part name="parameters" element="tns:luceneSearch" />
+  </message>
+  <message name="luceneSearchResponse">
+    <part name="parameters" element="tns:luceneSearchResponse" />
+  </message>
+  <message name="luceneGetPopulating">
+    <part name="parameters" element="tns:luceneGetPopulating" />
+  </message>
+  <message name="luceneGetPopulatingResponse">
+    <part name="parameters" element="tns:luceneGetPopulatingResponse" />
+  </message>
+  <portType name="ICAT">
+    <operation name="getUserName">
+      <input wsam:Action="http://icatproject.org/ICAT/getUserNameRequest" message="tns:getUserName" />
+      <output wsam:Action="http://icatproject.org/ICAT/getUserNameResponse" message="tns:getUserNameResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/getUserName/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="get">
+      <input wsam:Action="http://icatproject.org/ICAT/getRequest" message="tns:get" />
+      <output wsam:Action="http://icatproject.org/ICAT/getResponse" message="tns:getResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/get/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="getProperties">
+      <input wsam:Action="http://icatproject.org/ICAT/getPropertiesRequest" message="tns:getProperties" />
+      <output wsam:Action="http://icatproject.org/ICAT/getPropertiesResponse" message="tns:getPropertiesResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/getProperties/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="create">
+      <input wsam:Action="http://icatproject.org/ICAT/createRequest" message="tns:create" />
+      <output wsam:Action="http://icatproject.org/ICAT/createResponse" message="tns:createResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/create/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="delete">
+      <input wsam:Action="http://icatproject.org/ICAT/deleteRequest" message="tns:delete" />
+      <output wsam:Action="http://icatproject.org/ICAT/deleteResponse" message="tns:deleteResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/delete/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="search">
+      <input wsam:Action="http://icatproject.org/ICAT/searchRequest" message="tns:search" />
+      <output wsam:Action="http://icatproject.org/ICAT/searchResponse" message="tns:searchResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/search/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="update">
+      <input wsam:Action="http://icatproject.org/ICAT/updateRequest" message="tns:update" />
+      <output wsam:Action="http://icatproject.org/ICAT/updateResponse" message="tns:updateResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/update/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="dummy">
+      <input wsam:Action="http://icatproject.org/ICAT/dummyRequest" message="tns:dummy" />
+      <output wsam:Action="http://icatproject.org/ICAT/dummyResponse" message="tns:dummyResponse" />
+    </operation>
+    <operation name="refresh">
+      <input wsam:Action="http://icatproject.org/ICAT/refreshRequest" message="tns:refresh" />
+      <output wsam:Action="http://icatproject.org/ICAT/refreshResponse" message="tns:refreshResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/refresh/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="login">
+      <input wsam:Action="http://icatproject.org/ICAT/loginRequest" message="tns:login" />
+      <output wsam:Action="http://icatproject.org/ICAT/loginResponse" message="tns:loginResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/login/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="logout">
+      <input wsam:Action="http://icatproject.org/ICAT/logoutRequest" message="tns:logout" />
+      <output wsam:Action="http://icatproject.org/ICAT/logoutResponse" message="tns:logoutResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/logout/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="deleteMany">
+      <input wsam:Action="http://icatproject.org/ICAT/deleteManyRequest" message="tns:deleteMany" />
+      <output wsam:Action="http://icatproject.org/ICAT/deleteManyResponse" message="tns:deleteManyResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/deleteMany/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="getEntityInfo">
+      <input wsam:Action="http://icatproject.org/ICAT/getEntityInfoRequest" message="tns:getEntityInfo" />
+      <output wsam:Action="http://icatproject.org/ICAT/getEntityInfoResponse" message="tns:getEntityInfoResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/getEntityInfo/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="getRemainingMinutes">
+      <input wsam:Action="http://icatproject.org/ICAT/getRemainingMinutesRequest" message="tns:getRemainingMinutes" />
+      <output wsam:Action="http://icatproject.org/ICAT/getRemainingMinutesResponse" message="tns:getRemainingMinutesResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/getRemainingMinutes/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="createMany">
+      <input wsam:Action="http://icatproject.org/ICAT/createManyRequest" message="tns:createMany" />
+      <output wsam:Action="http://icatproject.org/ICAT/createManyResponse" message="tns:createManyResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/createMany/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="getApiVersion">
+      <input wsam:Action="http://icatproject.org/ICAT/getApiVersionRequest" message="tns:getApiVersion" />
+      <output wsam:Action="http://icatproject.org/ICAT/getApiVersionResponse" message="tns:getApiVersionResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/getApiVersion/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="getEntityNames">
+      <input wsam:Action="http://icatproject.org/ICAT/getEntityNamesRequest" message="tns:getEntityNames" />
+      <output wsam:Action="http://icatproject.org/ICAT/getEntityNamesResponse" message="tns:getEntityNamesResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/getEntityNames/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="searchText">
+      <input wsam:Action="http://icatproject.org/ICAT/searchTextRequest" message="tns:searchText" />
+      <output wsam:Action="http://icatproject.org/ICAT/searchTextResponse" message="tns:searchTextResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/searchText/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="isAccessAllowed">
+      <input wsam:Action="http://icatproject.org/ICAT/isAccessAllowedRequest" message="tns:isAccessAllowed" />
+      <output wsam:Action="http://icatproject.org/ICAT/isAccessAllowedResponse" message="tns:isAccessAllowedResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/isAccessAllowed/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="lucenePopulate">
+      <input wsam:Action="http://icatproject.org/ICAT/lucenePopulateRequest" message="tns:lucenePopulate" />
+      <output wsam:Action="http://icatproject.org/ICAT/lucenePopulateResponse" message="tns:lucenePopulateResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/lucenePopulate/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="luceneClear">
+      <input wsam:Action="http://icatproject.org/ICAT/luceneClearRequest" message="tns:luceneClear" />
+      <output wsam:Action="http://icatproject.org/ICAT/luceneClearResponse" message="tns:luceneClearResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/luceneClear/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="luceneCommit">
+      <input wsam:Action="http://icatproject.org/ICAT/luceneCommitRequest" message="tns:luceneCommit" />
+      <output wsam:Action="http://icatproject.org/ICAT/luceneCommitResponse" message="tns:luceneCommitResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/luceneCommit/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="luceneSearch">
+      <input wsam:Action="http://icatproject.org/ICAT/luceneSearchRequest" message="tns:luceneSearch" />
+      <output wsam:Action="http://icatproject.org/ICAT/luceneSearchResponse" message="tns:luceneSearchResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/luceneSearch/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+    <operation name="luceneGetPopulating">
+      <input wsam:Action="http://icatproject.org/ICAT/luceneGetPopulatingRequest" message="tns:luceneGetPopulating" />
+      <output wsam:Action="http://icatproject.org/ICAT/luceneGetPopulatingResponse" message="tns:luceneGetPopulatingResponse" />
+      <fault wsam:Action="http://icatproject.org/ICAT/luceneGetPopulating/Fault/IcatException" name="IcatException" message="tns:IcatException" />
+    </operation>
+  </portType>
+  <binding name="ICATPortBinding" type="tns:ICAT">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getUserName">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="get">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getProperties">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="create">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="delete">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="search">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="update">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="dummy">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="refresh">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="login">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="logout">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="deleteMany">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getEntityInfo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getRemainingMinutes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="createMany">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getApiVersion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getEntityNames">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="searchText">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="isAccessAllowed">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="lucenePopulate">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="luceneClear">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="luceneCommit">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="luceneSearch">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="luceneGetPopulating">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IcatException">
+        <soap:fault use="literal" name="IcatException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="ICATService">
+    <port name="ICATPort" binding="tns:ICATPortBinding">
+      <soap:address location="https://icatdev.isis.cclrc.ac.uk:443/ICATService/ICAT" />
+    </port>
+  </service>
+</definitions>

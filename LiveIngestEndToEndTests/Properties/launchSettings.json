@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "LiveIngestEndToEndTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "APPLICATIONS_DIR": "C:/user/rop61488/test",
+        "TEST_DATA_DIR": "C:/user/rop61488/projects/work/LiveIngestEndToEndTests/test-data",
+        "AMQ_BROKER_URL": "tcp://icatdevingest.isis.cclrc.ac.uk:61616"
+      }
+    }
+  }
+}

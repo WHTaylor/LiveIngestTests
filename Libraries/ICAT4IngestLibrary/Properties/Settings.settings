@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ICAT4IngestLibrary.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ICATAuthnComp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">uows</Value>
+    </Setting>
+    <Setting Name="CalibrationRBs" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0, 1000, -1000, 12345, 99999, 999999</Value>
+    </Setting>
+    <Setting Name="Success_Queue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ICAT Success</Value>
+    </Setting>
+    <Setting Name="post_Error_Ingest" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ICAT_Wait" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ICAT_Queue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ICAT</Value>
+    </Setting>
+    <Setting Name="URL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">activemq:failover:(localhost:61616)</Value>
+    </Setting>
+    <Setting Name="Long_Queue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Long ICAT</Value>
+    </Setting>
+    <Setting Name="Error_Queue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pre ICAT Error Queue</Value>
+    </Setting>
+    <Setting Name="ICATUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">isisdata@stfc.ac.uk</Value>
+    </Setting>
+    <Setting Name="ICATPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gPRa$"yBgcw45!PQYF</Value>
+    </Setting>
+    <Setting Name="InstrumentsXMLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ActiveIngest\IngestExternalXmls\Instruments.xml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

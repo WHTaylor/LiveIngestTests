@@ -1,0 +1,945 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://icatproject.org" targetNamespace="http://icatproject.org" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IcatException" type="tns:IcatException" />
+  <xs:element name="create" type="tns:create" />
+  <xs:element name="createMany" type="tns:createMany" />
+  <xs:element name="createManyResponse" type="tns:createManyResponse" />
+  <xs:element name="createResponse" type="tns:createResponse" />
+  <xs:element name="datafile" type="tns:datafile" />
+  <xs:element name="datafileParameter" type="tns:datafileParameter" />
+  <xs:element name="dataset" type="tns:dataset" />
+  <xs:element name="datasetParameter" type="tns:datasetParameter" />
+  <xs:element name="delete" type="tns:delete" />
+  <xs:element name="deleteMany" type="tns:deleteMany" />
+  <xs:element name="deleteManyResponse" type="tns:deleteManyResponse" />
+  <xs:element name="deleteResponse" type="tns:deleteResponse" />
+  <xs:element name="dummy" type="tns:dummy" />
+  <xs:element name="dummyResponse" type="tns:dummyResponse" />
+  <xs:element name="get" type="tns:get" />
+  <xs:element name="getApiVersion" type="tns:getApiVersion" />
+  <xs:element name="getApiVersionResponse" type="tns:getApiVersionResponse" />
+  <xs:element name="getEntityInfo" type="tns:getEntityInfo" />
+  <xs:element name="getEntityInfoResponse" type="tns:getEntityInfoResponse" />
+  <xs:element name="getEntityNames" type="tns:getEntityNames" />
+  <xs:element name="getEntityNamesResponse" type="tns:getEntityNamesResponse" />
+  <xs:element name="getProperties" type="tns:getProperties" />
+  <xs:element name="getPropertiesResponse" type="tns:getPropertiesResponse" />
+  <xs:element name="getRemainingMinutes" type="tns:getRemainingMinutes" />
+  <xs:element name="getRemainingMinutesResponse" type="tns:getRemainingMinutesResponse" />
+  <xs:element name="getResponse" type="tns:getResponse" />
+  <xs:element name="getUserName" type="tns:getUserName" />
+  <xs:element name="getUserNameResponse" type="tns:getUserNameResponse" />
+  <xs:element name="investigationParameter" type="tns:investigationParameter" />
+  <xs:element name="isAccessAllowed" type="tns:isAccessAllowed" />
+  <xs:element name="isAccessAllowedResponse" type="tns:isAccessAllowedResponse" />
+  <xs:element name="log" type="tns:log" />
+  <xs:element name="login" type="tns:login" />
+  <xs:element name="loginResponse" type="tns:loginResponse" />
+  <xs:element name="logout" type="tns:logout" />
+  <xs:element name="logoutResponse" type="tns:logoutResponse" />
+  <xs:element name="luceneClear" type="tns:luceneClear" />
+  <xs:element name="luceneClearResponse" type="tns:luceneClearResponse" />
+  <xs:element name="luceneCommit" type="tns:luceneCommit" />
+  <xs:element name="luceneCommitResponse" type="tns:luceneCommitResponse" />
+  <xs:element name="luceneGetPopulating" type="tns:luceneGetPopulating" />
+  <xs:element name="luceneGetPopulatingResponse" type="tns:luceneGetPopulatingResponse" />
+  <xs:element name="lucenePopulate" type="tns:lucenePopulate" />
+  <xs:element name="lucenePopulateResponse" type="tns:lucenePopulateResponse" />
+  <xs:element name="luceneSearch" type="tns:luceneSearch" />
+  <xs:element name="luceneSearchResponse" type="tns:luceneSearchResponse" />
+  <xs:element name="refresh" type="tns:refresh" />
+  <xs:element name="refreshResponse" type="tns:refreshResponse" />
+  <xs:element name="sampleParameter" type="tns:sampleParameter" />
+  <xs:element name="search" type="tns:search" />
+  <xs:element name="searchResponse" type="tns:searchResponse" />
+  <xs:element name="searchText" type="tns:searchText" />
+  <xs:element name="searchTextResponse" type="tns:searchTextResponse" />
+  <xs:element name="update" type="tns:update" />
+  <xs:element name="updateResponse" type="tns:updateResponse" />
+  <xs:complexType name="luceneClear">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="luceneClearResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="IcatException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element name="offset" type="xs:int" />
+      <xs:element minOccurs="0" name="type" type="tns:icatExceptionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createMany">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="beans" type="tns:entityBaseBean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="entityBaseBean" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="createId" type="xs:string" />
+      <xs:element minOccurs="0" name="createTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="modId" type="xs:string" />
+      <xs:element minOccurs="0" name="modTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createManyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="create">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="bean" type="tns:entityBaseBean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getProperties">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPropertiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="luceneSearch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="query" type="xs:string" />
+      <xs:element name="maxCount" type="xs:int" />
+      <xs:element minOccurs="0" name="entityName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="luceneSearchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="lucenePopulate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="entityName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="lucenePopulateResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="get">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="query" type="xs:string" />
+      <xs:element name="primaryKey" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:entityBaseBean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getEntityNames">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getEntityNamesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getApiVersion">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getApiVersionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="luceneGetPopulating">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="luceneGetPopulatingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="update">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="bean" type="tns:entityBaseBean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getUserName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getUserNameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteMany">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="beans" type="tns:entityBaseBean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteManyResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="refresh">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="refreshResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="dummy">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:datafile" />
+      <xs:element minOccurs="0" name="arg1" type="tns:datafileFormat" />
+      <xs:element minOccurs="0" name="arg2" type="tns:datafileParameter" />
+      <xs:element minOccurs="0" name="arg3" type="tns:dataset" />
+      <xs:element minOccurs="0" name="arg4" type="tns:datasetParameter" />
+      <xs:element minOccurs="0" name="arg5" type="tns:datasetType" />
+      <xs:element minOccurs="0" name="arg6" type="tns:facility" />
+      <xs:element minOccurs="0" name="arg7" type="tns:facilityCycle" />
+      <xs:element minOccurs="0" name="arg8" type="tns:instrumentScientist" />
+      <xs:element minOccurs="0" name="arg9" type="tns:user" />
+      <xs:element minOccurs="0" name="arg10" type="tns:instrument" />
+      <xs:element minOccurs="0" name="arg11" type="tns:investigation" />
+      <xs:element minOccurs="0" name="arg12" type="tns:investigationType" />
+      <xs:element minOccurs="0" name="arg13" type="tns:investigationUser" />
+      <xs:element minOccurs="0" name="arg14" type="tns:keyword" />
+      <xs:element minOccurs="0" name="arg15" type="tns:parameterType" />
+      <xs:element minOccurs="0" name="arg16" type="tns:publication" />
+      <xs:element minOccurs="0" name="arg17" type="tns:relatedDatafile" />
+      <xs:element minOccurs="0" name="arg18" type="tns:sample" />
+      <xs:element minOccurs="0" name="arg19" type="tns:sampleParameter" />
+      <xs:element minOccurs="0" name="arg20" type="tns:shift" />
+      <xs:element minOccurs="0" name="arg21" type="tns:study" />
+      <xs:element minOccurs="0" name="arg22" type="tns:studyInvestigation" />
+      <xs:element minOccurs="0" name="arg23" type="tns:studyStatus" />
+      <xs:element minOccurs="0" name="arg24" type="tns:application" />
+      <xs:element minOccurs="0" name="arg25" type="tns:job" />
+      <xs:element minOccurs="0" name="arg26" type="tns:dataCollection" />
+      <xs:element minOccurs="0" name="arg27" type="tns:dataCollectionParameter" />
+      <xs:element minOccurs="0" name="arg28" type="tns:dataCollectionDataset" />
+      <xs:element minOccurs="0" name="arg29" type="tns:dataCollectionDatafile" />
+      <xs:element minOccurs="0" name="arg30" type="tns:grouping" />
+      <xs:element minOccurs="0" name="arg31" type="tns:userGroup" />
+      <xs:element minOccurs="0" name="arg32" type="tns:log" />
+      <xs:element minOccurs="0" name="arg33" type="tns:publicStep" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="datafile">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="checksum" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="dataCollectionDatafiles" nillable="true" type="tns:dataCollectionDatafile" />
+          <xs:element minOccurs="0" name="datafileCreateTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="datafileFormat" type="tns:datafileFormat" />
+          <xs:element minOccurs="0" name="datafileModTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="dataset" type="tns:dataset" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="destDatafiles" nillable="true" type="tns:relatedDatafile" />
+          <xs:element minOccurs="0" name="doi" type="xs:string" />
+          <xs:element minOccurs="0" name="fileSize" type="xs:long" />
+          <xs:element minOccurs="0" name="location" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="parameters" nillable="true" type="tns:datafileParameter" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="sourceDatafiles" nillable="true" type="tns:relatedDatafile" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dataCollectionDatafile">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dataCollection" type="tns:dataCollection" />
+          <xs:element minOccurs="0" name="datafile" type="tns:datafile" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dataCollection">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="dataCollectionDatafiles" nillable="true" type="tns:dataCollectionDatafile" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="dataCollectionDatasets" nillable="true" type="tns:dataCollectionDataset" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="jobsAsInput" nillable="true" type="tns:job" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="jobsAsOutput" nillable="true" type="tns:job" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="parameters" nillable="true" type="tns:dataCollectionParameter" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dataCollectionDataset">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dataCollection" type="tns:dataCollection" />
+          <xs:element minOccurs="0" name="dataset" type="tns:dataset" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dataset">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element name="complete" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="dataCollectionDatasets" nillable="true" type="tns:dataCollectionDataset" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datafiles" nillable="true" type="tns:datafile" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="doi" type="xs:string" />
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="location" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="parameters" nillable="true" type="tns:datasetParameter" />
+          <xs:element minOccurs="0" name="sample" type="tns:sample" />
+          <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="type" type="tns:datasetType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="investigation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datasets" nillable="true" type="tns:dataset" />
+          <xs:element minOccurs="0" name="doi" type="xs:string" />
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationGroups" nillable="true" type="tns:investigationGroup" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationInstruments" nillable="true" type="tns:investigationInstrument" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationUsers" nillable="true" type="tns:investigationUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="keywords" nillable="true" type="tns:keyword" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="parameters" nillable="true" type="tns:investigationParameter" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="publications" nillable="true" type="tns:publication" />
+          <xs:element minOccurs="0" name="releaseDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="samples" nillable="true" type="tns:sample" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="shifts" nillable="true" type="tns:shift" />
+          <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="studyInvestigations" nillable="true" type="tns:studyInvestigation" />
+          <xs:element minOccurs="0" name="summary" type="xs:string" />
+          <xs:element minOccurs="0" name="title" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="tns:investigationType" />
+          <xs:element minOccurs="0" name="visitId" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="facility">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="applications" nillable="true" type="tns:application" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datafileFormats" nillable="true" type="tns:datafileFormat" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datasetTypes" nillable="true" type="tns:datasetType" />
+          <xs:element minOccurs="0" name="daysUntilRelease" type="xs:int" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="facilityCycles" nillable="true" type="tns:facilityCycle" />
+          <xs:element minOccurs="0" name="fullName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="instruments" nillable="true" type="tns:instrument" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationTypes" nillable="true" type="tns:investigationType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigations" nillable="true" type="tns:investigation" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="parameterTypes" nillable="true" type="tns:parameterType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="sampleTypes" nillable="true" type="tns:sampleType" />
+          <xs:element minOccurs="0" name="url" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="application">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="jobs" nillable="true" type="tns:job" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="version" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="job">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="application" type="tns:application" />
+          <xs:element minOccurs="0" name="arguments" type="xs:string" />
+          <xs:element minOccurs="0" name="inputDataCollection" type="tns:dataCollection" />
+          <xs:element minOccurs="0" name="outputDataCollection" type="tns:dataCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="datafileFormat">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datafiles" nillable="true" type="tns:datafile" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="xs:string" />
+          <xs:element minOccurs="0" name="version" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="datasetType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datasets" nillable="true" type="tns:dataset" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="facilityCycle">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="instrument">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" name="fullName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="instrumentScientists" nillable="true" type="tns:instrumentScientist" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationInstruments" nillable="true" type="tns:investigationInstrument" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="xs:string" />
+          <xs:element minOccurs="0" name="url" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="instrumentScientist">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="instrument" type="tns:instrument" />
+          <xs:element minOccurs="0" name="user" type="tns:user" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="user">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fullName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="instrumentScientists" nillable="true" type="tns:instrumentScientist" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationUsers" nillable="true" type="tns:investigationUser" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="studies" nillable="true" type="tns:study" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="userGroups" nillable="true" type="tns:userGroup" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="investigationUser">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="role" type="xs:string" />
+          <xs:element minOccurs="0" name="user" type="tns:user" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="study">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="status" type="tns:studyStatus" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="studyInvestigations" nillable="true" type="tns:studyInvestigation" />
+          <xs:element minOccurs="0" name="user" type="tns:user" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="studyInvestigation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="study" type="tns:study" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="userGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="grouping" type="tns:grouping" />
+          <xs:element minOccurs="0" name="user" type="tns:user" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="grouping">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationGroups" nillable="true" type="tns:investigationGroup" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="rules" nillable="true" type="tns:rule" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="userGroups" nillable="true" type="tns:userGroup" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="investigationGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="grouping" type="tns:grouping" />
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="role" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="rule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="crudFlags" type="xs:string" />
+          <xs:element minOccurs="0" name="grouping" type="tns:grouping" />
+          <xs:element minOccurs="0" name="what" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="investigationInstrument">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="instrument" type="tns:instrument" />
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="investigationType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigations" nillable="true" type="tns:investigation" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="parameterType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element name="applicableToDataCollection" type="xs:boolean" />
+          <xs:element name="applicableToDatafile" type="xs:boolean" />
+          <xs:element name="applicableToDataset" type="xs:boolean" />
+          <xs:element name="applicableToInvestigation" type="xs:boolean" />
+          <xs:element name="applicableToSample" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="dataCollectionParameters" nillable="true" type="tns:dataCollectionParameter" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datafileParameters" nillable="true" type="tns:datafileParameter" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datasetParameters" nillable="true" type="tns:datasetParameter" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element name="enforced" type="xs:boolean" />
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="investigationParameters" nillable="true" type="tns:investigationParameter" />
+          <xs:element minOccurs="0" name="maximumNumericValue" type="xs:double" />
+          <xs:element minOccurs="0" name="minimumNumericValue" type="xs:double" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="permissibleStringValues" nillable="true" type="tns:permissibleStringValue" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="sampleParameters" nillable="true" type="tns:sampleParameter" />
+          <xs:element minOccurs="0" name="units" type="xs:string" />
+          <xs:element minOccurs="0" name="unitsFullName" type="xs:string" />
+          <xs:element minOccurs="0" name="valueType" type="tns:parameterValueType" />
+          <xs:element name="verified" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dataCollectionParameter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:parameter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dataCollection" type="tns:dataCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="parameter" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dateTimeValue" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="error" type="xs:double" />
+          <xs:element minOccurs="0" name="numericValue" type="xs:double" />
+          <xs:element minOccurs="0" name="rangeBottom" type="xs:double" />
+          <xs:element minOccurs="0" name="rangeTop" type="xs:double" />
+          <xs:element minOccurs="0" name="stringValue" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="tns:parameterType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="datafileParameter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:parameter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datafile" type="tns:datafile" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="datasetParameter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:parameter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dataset" type="tns:dataset" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="investigationParameter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:parameter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="permissibleStringValue">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="type" type="tns:parameterType" />
+          <xs:element minOccurs="0" name="value" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="sampleParameter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:parameter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="sample" type="tns:sample" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="sample">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="datasets" nillable="true" type="tns:dataset" />
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="parameters" nillable="true" type="tns:sampleParameter" />
+          <xs:element minOccurs="0" name="type" type="tns:sampleType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="sampleType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="facility" type="tns:facility" />
+          <xs:element minOccurs="0" name="molecularFormula" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="safetyInformation" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="samples" nillable="true" type="tns:sample" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="keyword">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="publication">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="doi" type="xs:string" />
+          <xs:element minOccurs="0" name="fullReference" type="xs:string" />
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="repository" type="xs:string" />
+          <xs:element minOccurs="0" name="repositoryId" type="xs:string" />
+          <xs:element minOccurs="0" name="url" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="shift">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="comment" type="xs:string" />
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="investigation" type="tns:investigation" />
+          <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="relatedDatafile">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="destDatafile" type="tns:datafile" />
+          <xs:element minOccurs="0" name="relation" type="xs:string" />
+          <xs:element minOccurs="0" name="sourceDatafile" type="tns:datafile" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="log">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element name="duration" type="xs:long" />
+          <xs:element minOccurs="0" name="entityId" type="xs:long" />
+          <xs:element minOccurs="0" name="entityName" type="xs:string" />
+          <xs:element minOccurs="0" name="operation" type="xs:string" />
+          <xs:element minOccurs="0" name="query" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="publicStep">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:entityBaseBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="field" type="xs:string" />
+          <xs:element minOccurs="0" name="origin" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dummyResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="plugin" type="xs:string" />
+      <xs:element name="credentials">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string" />
+                  <xs:element minOccurs="0" name="value" type="xs:string" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="luceneCommit">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="luceneCommitResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="searchText">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="query" type="xs:string" />
+      <xs:element name="maxCount" type="xs:int" />
+      <xs:element minOccurs="0" name="entityName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchTextResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getEntityInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="beanName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getEntityInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:entityInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="entityInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="classComment" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="constraints" nillable="true" type="tns:constraint" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="fields" nillable="true" type="tns:entityField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="constraint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="fieldNames" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="entityField">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comment" type="xs:string" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+      <xs:element name="notNullable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="relType" type="tns:relType" />
+      <xs:element minOccurs="0" name="stringLength" type="xs:int" />
+      <xs:element minOccurs="0" name="type" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="delete">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="bean" type="tns:entityBaseBean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="isAccessAllowed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="bean" type="tns:entityBaseBean" />
+      <xs:element minOccurs="0" name="accessType" type="tns:accessType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="isAccessAllowedResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="search">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+      <xs:element minOccurs="0" name="query" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="logout">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="logoutResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getRemainingMinutes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getRemainingMinutesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="icatExceptionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BAD_PARAMETER" />
+      <xs:enumeration value="INTERNAL" />
+      <xs:enumeration value="INSUFFICIENT_PRIVILEGES" />
+      <xs:enumeration value="NO_SUCH_OBJECT_FOUND" />
+      <xs:enumeration value="OBJECT_ALREADY_EXISTS" />
+      <xs:enumeration value="SESSION" />
+      <xs:enumeration value="VALIDATION" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="studyStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEW" />
+      <xs:enumeration value="IN_PROGRESS" />
+      <xs:enumeration value="COMPLETE" />
+      <xs:enumeration value="CANCELLED" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="parameterValueType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DATE_AND_TIME" />
+      <xs:enumeration value="NUMERIC" />
+      <xs:enumeration value="STRING" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="relType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ATTRIBUTE" />
+      <xs:enumeration value="MANY" />
+      <xs:enumeration value="ONE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="accessType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="READ" />
+      <xs:enumeration value="UPDATE" />
+      <xs:enumeration value="DELETE" />
+      <xs:enumeration value="CREATE" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
