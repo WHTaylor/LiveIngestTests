@@ -6,6 +6,7 @@ namespace LiveIngestEndToEndTests.Tests
     public class Tests
     {
         private readonly DataFileCopier _dataFileCopier = new DataFileCopier().ForInstrument("ARGUS");
+        private readonly DelayedAssert _asserter = new();
 
         [SetUp]
         public void Setup()
@@ -17,7 +18,7 @@ namespace LiveIngestEndToEndTests.Tests
         public void Test1()
         {
             _dataFileCopier.CopyRun("71790");
-            Assert.That(2, Is.EqualTo(1 + 1).After(5).Seconds);
+            _asserter.Success("71790.nxs");
         }
     }
 }
