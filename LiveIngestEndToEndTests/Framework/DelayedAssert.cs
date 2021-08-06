@@ -7,7 +7,8 @@ namespace LiveIngestEndToEndTests.Framework
     public class DelayedAssert
     {
         private readonly AMQClient _amqClient =
-            new(Environment.GetEnvironmentVariable("AMQ_BROKER_URL"));
+            new(Environment.GetEnvironmentVariable("AMQ_BROKER_URL"),
+                true);
 
         public void Success(
             string filename,
@@ -23,7 +24,7 @@ namespace LiveIngestEndToEndTests.Framework
         private bool InSuccessQueue(string fileName)
         {
             TestContext.Progress.WriteLine("Trying...");
-            return _amqClient.IsInQueue(fileName, MessageQueue.ICATSuccess);
+            return _amqClient.IsInQueue(fileName, MessageQueue.DMF);
         }
     }
 }

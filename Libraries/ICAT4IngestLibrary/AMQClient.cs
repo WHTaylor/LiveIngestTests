@@ -112,8 +112,11 @@ namespace ICAT4IngestLibrary.ActiveMQ
         {
             var dest = session.GetQueue(QueueName(queue));
             var browser = session.CreateBrowser(dest);
-            return browser.Cast<ITextMessage>()
-                .Any(m => m.Text.Contains(message));
+            foreach(ITextMessage m in browser)
+            {
+                if (m.Text.Contains(message)) return true;
+            }
+            return false;
         }
  
         private string QueueName(MessageQueue queue)
