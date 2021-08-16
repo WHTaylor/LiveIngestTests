@@ -98,8 +98,7 @@ namespace LiveIngestEndToEndTests.Framework
 
                 if (readLine == null)
                 {
-                    TestContext.Error.WriteLine(
-                        "Startup aborted unexpectedly");
+                    TestContext.Error.WriteLine("Startup aborted unexpectedly");
                     error = true;
                 }
                 else if (SuccessMarkers.Any(m => readLine.ToLower().Contains(m)))

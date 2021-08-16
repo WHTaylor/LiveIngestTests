@@ -8,18 +8,25 @@ namespace LiveIngestEndToEndTests.Framework
     {
         private readonly string _testDataRoot;
         private readonly string _archiveRoot;
-        private string _instrument;
+        private readonly string _instrumentDir;
 
-        public DataFileCopier()
+        /// <summary>
+        /// Create a DataFileCopier. Must be called after TempDataArchive::Create
+        /// </summary>
+        /// <param name="instrument"> The instrument the data files to be copied
+        /// are for. Controls directory files are copied to </param>
+        public DataFileCopier(string instrument)
         {
+            if (!Constants.InstrumentNames.Contains(instrument.ToUpper()))
+            {
+                throw new InvalidDataException(
+                    $"{instrument} is not a valid instrument. Must be one of:" +
+                    $"[{string.Join(", ", Constants.InstrumentNames)}]");
+            }
+
             _testDataRoot = Environment.GetEnvironmentVariable("TEST_DATA_DIR");
             _archiveRoot = TempDataArchive.RootDir;
-        }
-
-        public DataFileCopier ForInstrument(string instrumentName)
-        {
-            _instrument = instrumentName;
-            return this;
+            _instrumentDir = $"NDX{instrument.ToUpper()}";
         }
 
         public void CopyFile(string fileName)
@@ -40,10 +47,7 @@ namespace LiveIngestEndToEndTests.Framework
 
         private string DestPath(string fileName)
         {
-            return Path.Combine(
-                _archiveRoot,
-                $"NDX{_instrument.ToUpper()}",
-                fileName);
+            return Path.Combine(_archiveRoot, _instrumentDir, fileName);
         }
     }
 }

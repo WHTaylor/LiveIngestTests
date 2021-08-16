@@ -1,6 +1,6 @@
 # LiveIngestEndToEndTests
 
-Gosh what a mouthful of a name
+Gosh what a mouthful of a name. Design plan can be found [here](https://github.com/ral-facilities/isis-tasks/issues/22#issuecomment-885040628) (along with other parts of that thread).
 
 ## Usage
 
