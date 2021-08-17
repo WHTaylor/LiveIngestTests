@@ -1,6 +1,8 @@
-﻿using System.Timers;
+﻿using System.Reflection;
+using System.Timers;
+using System.Xml.Serialization;
 using log4net;
-using ICAT4IngestLibrary.org.icatproject.isisicat;
+using org.icatproject.isisicat.ICAT;
 
 namespace ICAT4IngestLibrary
 {
@@ -25,6 +27,9 @@ namespace ICAT4IngestLibrary
         public ICATClient(string username, string password) : this("uows", username, password) { }
         public ICATClient(string authPlugin, string username, string password)
         {
+            MethodInfo method = typeof(XmlSerializer).GetMethod(
+                "set_Mode", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            method.Invoke(null, new object[] { 1 });
             Service = new CATClient();
             SessionId = Service.login(authPlugin, BuildCredentials(username, password));
             Logger.Debug($"Logged into ICAT as {username}");
