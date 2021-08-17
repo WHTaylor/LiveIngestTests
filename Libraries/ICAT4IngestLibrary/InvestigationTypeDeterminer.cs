@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICAT4IngestLibrary.org.icatproject.isisicat;
+using org.icatproject.isisicat.ICAT;
 
 namespace ICAT4IngestLibrary
 {
