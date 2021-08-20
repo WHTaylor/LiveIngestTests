@@ -15,6 +15,15 @@ namespace LiveIngestEndToEndTests
         [OneTimeSetUp]
         public void EnvironmentSetup()
         {
+            try
+            {
+                TestDataVerifier.VerifyTestData();
+            }
+            catch (Exception e)
+            {
+                SetupError(e.Message);
+            }
+
             foreach (var app in (Application[]) Enum.GetValues(
                 typeof(Application)))
             {
