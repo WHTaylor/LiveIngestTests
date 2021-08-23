@@ -7,19 +7,29 @@ using NUnit.Framework;
 
 namespace LiveIngestEndToEndTests.Framework
 {
-    public class TestDataVerifier
+    public static class TestDataVerifier
     {
-        private static readonly string TestDataLockFile = "test-data.lock";
+        private const string TestDataLockFile = "test-data.lock";
 
         private static readonly string TestDataRoot =
             Environment.GetEnvironmentVariable("TEST_DATA_DIR");
 
         private static readonly Regex LinePattern = new(@"^(\S+) (\d+)$");
 
+        /// <summary>
+        /// Verifies the files in the test data directory match the ones tracked
+        /// in the lock file.
+        /// </summary>
+        /// <exception cref="Exception">
+        /// If any files in the lock file don't exist, or aren't the specified
+        /// size, or if any files in the test data directory aren't in the lock file
+        /// </exception>
         public static void VerifyTestData()
         {
-            List<string> files = new();
+            TestContext.Progress.WriteLine(
+                $"Verifying test files in {TestDataRoot} match lock file");
 
+            List<string> trackedFiles = new();
             // Check all files in lock file exist and are the expected size
             foreach (var line in File.ReadLines(TestDataLockFile))
             {
@@ -29,7 +39,7 @@ namespace LiveIngestEndToEndTests.Framework
                 var fileName = match.Groups[1].Value;
                 var expectedSize = long.Parse(match.Groups[2].Value);
                 var path = Path.Join(TestDataRoot, fileName);
-                files.Add(path);
+                trackedFiles.Add(path);
                 var fileInfo = new FileInfo(path);
                 if (!fileInfo.Exists)
                     throw new Exception(
@@ -43,7 +53,7 @@ namespace LiveIngestEndToEndTests.Framework
 
             // Check all files in the test data root were in the lock file
             var untrackedFiles = WalkFiles(TestDataRoot)
-                .Where(f => !files.Contains(f))
+                .Where(f => !trackedFiles.Contains(f))
                 .ToList();
             if (untrackedFiles.Count > 0)
                 throw new Exception(
