@@ -5,7 +5,7 @@ namespace LiveIngestEndToEndTests.Tests
 {
     public class Tests
     {
-        private readonly DataFileCopier _dataFileCopier = new DataFileCopier("ARGUS");
+        private readonly DataFileCopier _dataFileCopier = new ("EMU");
         private readonly DelayedAssert _asserter = new();
 
         [SetUp]

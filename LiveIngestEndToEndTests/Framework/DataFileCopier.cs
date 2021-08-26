@@ -8,7 +8,8 @@ namespace LiveIngestEndToEndTests.Framework
     {
         private readonly string _testDataRoot;
         private readonly string _archiveRoot;
-        private readonly string _instrumentDir;
+        private readonly string _instrument;
+        private string InstDir => Path.Join(_testDataRoot, _instrument);
 
         /// <summary>
         /// Create a DataFileCopier. Must be called after TempDataArchive::Create
@@ -26,18 +27,18 @@ namespace LiveIngestEndToEndTests.Framework
 
             _testDataRoot = Environment.GetEnvironmentVariable("TEST_DATA_DIR");
             _archiveRoot = TempDataArchive.RootDir;
-            _instrumentDir = $"NDX{instrument.ToUpper()}";
+            _instrument = instrument.ToUpper();
         }
 
         public void CopyFile(string fileName)
         {
-            var filePath = Path.Combine(_testDataRoot, fileName);
+            var filePath = Path.Combine(InstDir, fileName);
             File.Copy(filePath, DestPath(fileName));
         }
 
         public void CopyRun(string runNumber)
         {
-            var runFiles = Directory.EnumerateFiles(_testDataRoot)
+            var runFiles = Directory.EnumerateFiles(InstDir)
                 .Where(f => f.Contains(runNumber));
             foreach (var path in runFiles)
             {
@@ -47,7 +48,7 @@ namespace LiveIngestEndToEndTests.Framework
 
         private string DestPath(string fileName)
         {
-            return Path.Combine(_archiveRoot, _instrumentDir, fileName);
+            return Path.Combine(_archiveRoot, $"NDX{_instrument}", fileName);
         }
     }
 }

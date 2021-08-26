@@ -18,7 +18,9 @@ namespace LiveIngestEndToEndTests.Framework
             var constraint = Is.True
                 .After(timeout).Seconds
                 .PollEvery(pollingIntervalMs).MilliSeconds;
-            Assert.That(() => InSuccessQueue(filename), constraint);
+            var failMsg =
+                $"{filename} failed to reach success queue within {timeout} seconds";
+            Assert.That(() => InSuccessQueue(filename), constraint, failMsg);
         }
 
         private bool InSuccessQueue(string fileName)
