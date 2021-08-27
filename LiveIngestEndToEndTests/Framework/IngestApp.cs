@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using NUnit.Framework;
 
 namespace LiveIngestEndToEndTests.Framework
@@ -34,6 +35,7 @@ namespace LiveIngestEndToEndTests.Framework
 
         private readonly string _exe;
         private Process _proc;
+        private readonly List<string> _output = new();
 
         public IngestProcess(Application app)
         {
@@ -70,16 +72,18 @@ namespace LiveIngestEndToEndTests.Framework
                     CreateNoWindow = true,
                 }
             };
+
+            // Asynchronously read all stdout to _output
+            // We use the beginning of output to check the process has started
+            // correctly. All output must be consumed, otherwise the stdout
+            // buffer fills and log4net causes the ingest process to hang.
+            _proc.OutputDataReceived += (p, o) => _output.Add(o.Data);
             _proc.Start();
+            _proc.BeginOutputReadLine();
         }
 
         /// <summary>
         /// Wait up to timeoutSeconds for the process to be ready for ingestion.
-        ///
-        /// Two limitations of this implementation are because ReadLine() is
-        /// blocking - a) if the process hangs at startup, this will also hang,
-        /// and b) timeouts happen after the first output line after timeoutSeconds,
-        /// not at timeoutSeconds exactly.
         /// </summary>
         /// <param name="timeoutSeconds">Maximum seconds to wait</param>
         /// <returns>
@@ -88,13 +92,26 @@ namespace LiveIngestEndToEndTests.Framework
         /// </returns>
         private bool WaitForReady(int timeoutSeconds)
         {
-            var timer = new Stopwatch();
-            timer.Start();
             var error = false;
             var success = false;
+            var lineToRead = 0;
+            var timer = new Stopwatch();
+            timer.Start();
             while (!error && !success)
             {
-                var readLine = _proc.StandardOutput.ReadLine();
+                while (_output.Count <= lineToRead)
+                {
+                    if (timer.Elapsed.Seconds > timeoutSeconds)
+                    {
+                        TestContext.Error.WriteLine("Startup timed out");
+                        return false;
+                    }
+
+                    Thread.Sleep(20);
+                }
+
+                var readLine = _output[lineToRead];
+                lineToRead++;
 
                 if (readLine == null)
                 {
@@ -109,11 +126,6 @@ namespace LiveIngestEndToEndTests.Framework
                 else if (FailureMarkers.Any(m => readLine.ToLower().Contains(m)))
                 {
                     TestContext.Error.WriteLine($"Error on: {readLine}");
-                    error = true;
-                }
-                else if (timer.Elapsed.Seconds > timeoutSeconds)
-                {
-                    TestContext.Error.WriteLine("Startup timed out");
                     error = true;
                 }
             }
