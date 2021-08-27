@@ -12,8 +12,8 @@ namespace LiveIngestEndToEndTests.Framework
 
         public void Success(
             string filename,
-            int timeout = 10,
-            int pollingIntervalMs = 1000)
+            int timeout = 15,
+            int pollingIntervalMs = 3000)
         {
             var constraint = Is.True
                 .After(timeout).Seconds
@@ -26,7 +26,7 @@ namespace LiveIngestEndToEndTests.Framework
         private bool InSuccessQueue(string fileName)
         {
             TestContext.Progress.WriteLine("Trying...");
-            return _amqClient.IsInQueue(fileName, MessageQueue.DMF);
+            return _amqClient.IsInQueue(fileName, MessageQueue.ICATSuccess);
         }
     }
 }

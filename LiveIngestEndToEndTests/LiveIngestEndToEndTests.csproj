@@ -13,6 +13,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,4 +30,7 @@
     <ProjectReference Include="C:\Users\rop61488\projects\work\LiveIngestEndToEndTests\Libraries\ICAT4IngestLibrary\ICAT4IngestLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
 </Project>
