@@ -52,7 +52,7 @@ namespace LiveIngestEndToEndTests.Framework
             StartProc(fullArgs);
 
             TestContext.Progress.WriteLine("Waiting for app to be setup...");
-            var success = WaitForReady(5);
+            var success = WaitForReady(10);
             if (!success)
                 throw new ApplicationException($"{_exe} failed to start");
         }
