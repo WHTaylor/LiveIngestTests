@@ -1,4 +1,6 @@
 ﻿using System.Timers;
+using System.ServiceModel.Channels;
+using System.ServiceModel;
 using log4net;
 using ICAT4IngestLibrary.org.icatproject.isisicat;
 
@@ -22,10 +24,24 @@ namespace ICAT4IngestLibrary
         private Timer refreshTimer;
         private readonly int refreshDurationMinutes = 10;
 
-        public ICATClient(string username, string password) : this("uows", username, password) { }
-        public ICATClient(string authPlugin, string username, string password)
+        public ICATClient(
+            string username, string password,
+            Binding binding = null, EndpointAddress endpoint = null)
+            : this("uows", username, password, binding, endpoint) { }
+
+        public ICATClient(
+            string authPlugin, string username, string password,
+            Binding binding = null, EndpointAddress endpoint = null)
         {
-            Service = new CATClient();
+            if (binding != null && endpoint != null)
+            {
+                Service = new CATClient(binding, endpoint);
+            }
+            else
+            {
+                Service = new CATClient();
+            }
+
             SessionId = Service.login(authPlugin, BuildCredentials(username, password));
             Logger.Debug($"Logged into ICAT as {username}");
 

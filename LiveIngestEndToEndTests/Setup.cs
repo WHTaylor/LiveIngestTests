@@ -23,6 +23,8 @@ namespace LiveIngestEndToEndTests
             {
                 SetupError(e.Message);
             }
+            ICAT.ConnectClient();
+            TempDataArchive.Create();
 
             foreach (var app in (Application[]) Enum.GetValues(
                 typeof(Application)))
@@ -36,8 +38,6 @@ namespace LiveIngestEndToEndTests
                     SetupError(e.Message);
                 }
             }
-
-            TempDataArchive.Create();
 
             // Setup ICAT data? AKA delete leftovers in advance
             // Queue component setup/maybe clearing?
