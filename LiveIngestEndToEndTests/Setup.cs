@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using LiveIngestEndToEndTests.Framework;
 using NUnit.Framework;
+using ICAT4IngestLibrary.ActiveMQ;
 
 namespace LiveIngestEndToEndTests
 {
@@ -41,7 +42,11 @@ namespace LiveIngestEndToEndTests
             }
 
             // Setup ICAT data? AKA delete leftovers in advance
-            // Queue component setup/maybe clearing?
+
+            TestContext.Progress.WriteLine("Clearing test queues");
+            var amqClient = new AMQClient(
+                "tcp://icatdevingest.isis.cclrc.ac.uk:61616", true);
+            amqClient.DeleteTestQueues();
 
             try
             {

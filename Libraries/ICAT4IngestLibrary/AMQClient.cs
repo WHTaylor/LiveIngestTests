@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using log4net;
 using Apache.NMS;
 using Apache.NMS.Util;
 
@@ -17,6 +17,7 @@ namespace ICAT4IngestLibrary.ActiveMQ
 
     public class AMQClient
     {
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly bool testMode;
         private readonly ISession session;
         private readonly Dictionary<MessageQueue, IMessageProducer> producers = new Dictionary<MessageQueue, IMessageProducer>();
@@ -123,6 +124,21 @@ namespace ICAT4IngestLibrary.ActiveMQ
         {
             var prefix = testMode ? "(Test) " : "";
             return $"{prefix}{queueNames[queue]}";
+        }
+
+        public void DeleteTestQueues()
+        {
+            if (!testMode)
+            {
+                log.Warn("DeleteTestQueues called whilst not in test mode, not doing anything");
+                return;
+            }
+            var queues = (MessageQueue[])Enum.GetValues(typeof(MessageQueue));
+            foreach (var queue in queues)
+            {
+                var dest = session.GetQueue(QueueName(queue));
+                session.DeleteDestination(dest);
+            }
         }
     }
 }
