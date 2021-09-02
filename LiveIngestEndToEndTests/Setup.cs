@@ -6,6 +6,7 @@ using LiveIngestEndToEndTests.Framework;
 using NUnit.Framework;
 using ICAT4IngestLibrary.ActiveMQ;
 
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 namespace LiveIngestEndToEndTests
 {
     [SetUpFixture]
