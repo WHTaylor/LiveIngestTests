@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.IO;
 using LiveIngestEndToEndTests.Framework;
@@ -44,10 +45,11 @@ namespace LiveIngestEndToEndTests
 
             try
             {
-                _processes[Application.FileWatcher]
-                    .Start(TempDataArchive.RootDir);
-                _processes[Application.LiveMonitor].Start();
-                _processes[Application.XMLtoICAT].Start();
+                Task.WaitAll(
+                    Task.Run(() => _processes[Application.FileWatcher]
+                        .Start(TempDataArchive.RootDir)),
+                    Task.Run(() => _processes[Application.LiveMonitor].Start()),
+                    Task.Run(() => _processes[Application.XMLtoICAT].Start()));
             }
             catch (ApplicationException e)
             {

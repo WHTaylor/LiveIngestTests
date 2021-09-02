@@ -51,7 +51,7 @@ namespace LiveIngestEndToEndTests.Framework
             var fullArgs = args.Concat(new[] {"--test-mode"});
             StartProc(fullArgs);
 
-            TestContext.Progress.WriteLine("Waiting for app to be setup...");
+            TestContext.Progress.WriteLine($"Waiting for {_exe} to startup...");
             var success = WaitForReady(10);
             if (!success)
                 throw new ApplicationException($"{_exe} failed to start");
@@ -59,7 +59,6 @@ namespace LiveIngestEndToEndTests.Framework
 
         private void StartProc(IEnumerable<string> args)
         {
-            TestContext.Progress.WriteLine($"Starting {_exe}");
             _proc = new Process
             {
                 StartInfo = new ProcessStartInfo(_exe)
@@ -120,7 +119,7 @@ namespace LiveIngestEndToEndTests.Framework
                 }
                 else if (SuccessMarkers.Any(m => readLine.ToLower().Contains(m)))
                 {
-                    TestContext.Progress.WriteLine($"Success on: {readLine}");
+                    TestContext.Progress.WriteLine($"{_exe} started successfully with: {readLine}");
                     success = true;
                 }
                 else if (FailureMarkers.Any(m => readLine.ToLower().Contains(m)))
