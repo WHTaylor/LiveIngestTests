@@ -14,6 +14,9 @@ namespace LiveIngestEndToEndTests.Framework
         FileWatcher, LiveMonitor, XMLtoICAT,
     }
 
+    /// <summary>
+    /// Wraps an ingest application process with methods for starting and stopping
+    /// </summary>
     public class IngestProcess
     {
         private static readonly string ApplicationsDir =

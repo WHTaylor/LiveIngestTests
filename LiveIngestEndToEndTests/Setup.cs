@@ -15,6 +15,14 @@ namespace LiveIngestEndToEndTests
         private readonly Dictionary<Application, IngestProcess>
             _processes = new();
 
+        /// <summary>
+        /// Sets up the ingest applications and test environment:
+        ///  - Verifies test data against the lock file.
+        ///  - Connects to ICAT.
+        ///  - Creates a fake data archive.
+        ///  - Clears the test queues.
+        ///  - Starts one of each live ingest application as subprocesses.
+        /// </summary>
         [OneTimeSetUp]
         public void EnvironmentSetup()
         {
@@ -42,11 +50,9 @@ namespace LiveIngestEndToEndTests
                 }
             }
 
-            // Setup ICAT data? AKA delete leftovers in advance
-
             TestContext.Progress.WriteLine("Clearing test queues");
             var amqClient = new AMQClient(
-                "tcp://icatdevingest.isis.cclrc.ac.uk:61616", true);
+                Environment.GetEnvironmentVariable("AMQ_BROKER_URL"), true);
             amqClient.DeleteTestQueues();
 
             try
@@ -62,12 +68,13 @@ namespace LiveIngestEndToEndTests
                 SetupError(e.Message);
             }
 
-            TestContext.Progress.WriteLine("All started");
+            TestContext.Progress.WriteLine("Apps started, running tests");
         }
 
         [OneTimeTearDown]
         public void TearDown()
         {
+            TestContext.Progress.WriteLine("Test suite finished, stopping apps");
             foreach (var proc in _processes.Values)
             {
                 proc.Stop();
